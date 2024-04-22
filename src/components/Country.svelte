@@ -1,6 +1,7 @@
 <script>
   import * as d3 from "d3";
   import { draw } from "svelte/transition";
+  import { beforeUpdate, afterUpdate } from "svelte";
   import { palette, magnitude, icon, texture } from "$lib/index.js";
 
   export let isolated;
@@ -17,6 +18,10 @@
   countries = countries.sort((a, b) => b["2020"] - a["2020"]);
 
   let bg = palette(dest_subregion)[7];
+
+  $: if (!isolated) {
+    console.log(`not isolated`);
+  }
 
   const padding = { top: paddingY, right: paddingX, bottom: paddingY, left: 0 };
 
@@ -48,9 +53,9 @@
 >
   <svg {width} {height}>
     <g transform={`translate(${padding.left}, ${padding.top})`}>
-      {#each countries as c, i}
+      {#each countries as c, i (i)}
         <g class="column">
-          {#each magnitude(c["2020"], padding.top, padding.bottom) as tile, j}
+          {#each magnitude(c["2020"], padding.top, padding.bottom) as tile, j (j)}
             <g transform={`translate(${x(i)}, ${y(j)})`}>
               <rect
                 width={size}
@@ -59,26 +64,28 @@
                   ? bg
                   : icon(tile.mag, palette(c.orig_subregion)).color}
               />
-              {#if isolated && !tile.empty}
-                <g
-                  x={x(i)}
-                  y={y(j)}
-                  width={size}
-                  height={size}
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  style={texture(
-                    tile.mag,
-                    palette(c.orig_subregion),
-                    c.orig_subregion
-                  ).style}
-                  >{@html texture(
-                    tile.mag,
-                    palette(c.orig_subregion),
-                    c.orig_subregion
-                  ).svg}
-                </g>
+              {#if isolated}
+                {#if !tile.empty}
+                  <g
+                    x={x(i)}
+                    y={y(j)}
+                    width={size}
+                    height={size}
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    style={texture(tile.mag, palette(c.orig_subregion), false)
+                      .style}
+                    >{@html texture(
+                      tile.mag,
+                      palette(c.orig_subregion),
+                      j <
+                        magnitude(c["2020"], padding.top, padding.bottom)
+                          .length /
+                          2
+                    ).svg}
+                  </g>
+                {/if}
               {/if}
             </g>
           {/each}

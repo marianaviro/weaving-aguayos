@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.67 28.67">
+<svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.17 27.17">
   <defs>
     <style>
       .d {
         fill: #fb8c59;
-        stroke: #fb8c59;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-width: 1.5px;
+        stroke-width: 0px;
       }
     </style>
   </defs>
   <g id="c" data-name="Layer 1">
-    <path class="d" d="M.75.75l8.15,13.58L.75,27.92V.75Z"/>
-    <path class="d" d="M27.92.75l-8.15,13.58,8.15,13.58V.75Z"/>
+    <g>
+      <polygon class="d" points=".75 2.71 7.28 13.58 .75 24.46 .75 2.71"/>
+      <path class="d" d="M1.5,5.42l4.9,8.17L1.5,21.75V5.42M0,0v27.17l8.15-13.58L0,0h0Z"/>
+    </g>
+    <g>
+      <polygon class="d" points="19.89 13.58 26.42 2.71 26.42 24.46 19.89 13.58"/>
+      <path class="d" d="M25.67,5.42v16.34l-4.9-8.17,4.9-8.17M27.17,0l-8.15,13.58,8.15,13.58V0h0Z"/>
+    </g>
   </g>
 </svg>

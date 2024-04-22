@@ -63,7 +63,7 @@
         {handleHover}
       />
     {:else}
-      {#each countries as c}
+      {#each countries as c (c)}
         <Country
           {isolated}
           name={c}
@@ -103,6 +103,12 @@
     gap: 2em;
     flex-wrap: wrap;
     flex-direction: column;
+    scroll-behavior: smooth;
+    overflow-x: scroll;
+  }
+
+  .countries.iso .container {
+    overflow-x: hidden;
   }
 
   button {
