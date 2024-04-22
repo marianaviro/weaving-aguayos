@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.17 27.17">
+  <g id="c" data-name="Layer 1">
+    <g>
+      <rect width="27.17" height="27.17" style="fill: #900; stroke-width: 0px;"/>
+      <polygon points="20.58 10.64 16.53 10.64 16.53 6.58 10.64 6.58 10.64 10.64 6.58 10.64 6.58 16.53 10.64 16.53 10.64 20.58 16.53 20.58 16.53 16.53 20.58 16.53 20.58 10.64" style="fill: #ef6548; stroke-width: 0px;"/>
+      <rect x="12.08" y="12.08" width="3" height="3" style="fill: #900; stroke-width: 0px;"/>
+      <rect x="16.58" y="3.58" width="3" height="3" style="fill: #fdd49e; stroke-width: 0px;"/>
+      <rect x="7.58" y="20.58" width="3" height="3" style="fill: #fdd49e; stroke-width: 0px;"/>
+      <rect x="3.58" y="16.58" width="3" height="3" style="fill: #fdd49e; stroke-width: 0px;"/>
+      <rect x="3.58" y="20.58" width="3" height="3" style="fill: #fdd49e; stroke-width: 0px;"/>
+      <rect x="20.58" y="7.58" width="3" height="3" style="fill: #fdd49e; stroke-width: 0px;"/>
+      <rect x="20.58" y="3.58" width="3" height="3" style="fill: #fdd49e; stroke-width: 0px;"/>
+    </g>
+  </g>
+</svg>
