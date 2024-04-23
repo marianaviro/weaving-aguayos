@@ -107,82 +107,72 @@ export const texture = (mag, palette, invert) => {
     if (mag === "mil") {
       t = {
         name: "mil",
-        style: `fill: ${palette[1]};`,
-        svg: `<polygon class="d" points="0 13.58 13.58 0 27.17 13.58 13.58 27.17 0 13.58"/>`,
+        viewbox: "",
+        style: "",
+        svg: "",
       };
-    } else if (mag === "tho") {
+    } else if (mag === "hun_tho") {
       t = {
         name: "hun_tho",
-        style: `stroke: ${palette[2]}; fill: none;`,
-        svg: `<line class="d" x1=".75" y1="14.33" x2="14.33" y2="27.92"/>
-        <line class="d" x1=".75" y1=".75" x2="27.92" y2="27.92"/>
-        <line class="d" x1="14.33" y1=".75" x2="27.92" y2="14.33"/>`,
+        viewbox: "",
+        style: "",
+        svg: "",
       };
     } else if (mag === "doz_tho") {
       t = {
         name: "doz_tho",
+        viewbox: "0 0 28.6698 28.6698",
         style: `stroke: ${palette[1]};`,
-        svg: `<line class="d" x1=".75" y1="14.33" x2="14.33" y2="27.92"/>
-        <line class="d" x1=".75" y1=".75" x2="27.92" y2="27.92"/>
-        <line class="d" x1="14.33" y1=".75" x2="27.92" y2="14.33"/>
-        <line class="d" x1=".75" y1="14.33" x2="14.33" y2=".75"/>
-        <line class="d" x1=".75" y1="27.92" x2="27.92" y2=".75"/>
-        <line class="d" x1="14.33" y1="27.92" x2="27.92" y2="14.33"/>`,
+        svg: `<g id="c" data-name="Layer 1">
+        <line class="d" x1=".75" y1="14.33485" x2="14.3349" y2="27.9198"/>
+        <line class="d" x1=".75" y1=".75" x2="27.9198" y2="27.9198"/>
+        <line class="d" x1="14.3349" y1=".75" x2="27.9198" y2="14.33485"/>
+        <line class="d" x1=".75" y1="14.33485" x2="14.3349" y2=".75"/>
+        <line class="d" x1=".75" y1="27.9198" x2="27.9198" y2=".75"/>
+        <line class="d" x1="14.3349" y1="27.9198" x2="27.9198" y2="14.33485"/>
+      </g>`,
       };
-    } else if (mag === "hun_tho") {
+    } else if (mag === "tho") {
       t = {
         name: "tho",
+        viewbox: "0 0 28.6698 28.6698",
         style: `stroke: ${palette[2]};`,
-        svg: `<line class="d" x1="14.33" y1=".75" x2="27.92" y2="14.33"/>
-        <line class="d" x1=".75" y1="14.33" x2="14.33" y2=".75"/>
-        <line class="d" x1=".75" y1="14.33" x2="14.33" y2="27.92"/>
-        <line class="d" x1="7.54" y1=".75" x2="27.92" y2="21.13"/>
-        <line class="d" x1=".75" y1="7.54" x2="21.13" y2="27.92"/>
-        <line class="d" x1="27.92" y1="7.54" x2="7.54" y2="27.92"/>
-        <line class="d" x1="21.13" y1=".75" x2=".75" y2="21.13"/>
-        <line class="d" x1=".75" y1=".75" x2="27.92" y2="27.92"/>
-        <line class="d" x1=".75" y1="27.92" x2="27.92" y2=".75"/>
-        <line class="d" x1="14.33" y1="27.92" x2="27.92" y2="14.33"/>`,
+        svg: `<g id="c" data-name="Layer 1">
+        <line class="d" x1=".75" y1="14.33488" x2="14.3349" y2="27.9198"/>
+        <line class="d" x1=".75" y1=".75" x2="27.9198" y2="27.9198"/>
+        <line class="d" x1="14.3349" y1=".75" x2="27.9198" y2="14.33488"/>
+      </g>`,
+      };
+    } else if (mag === "hun") {
+      t = {
+        name: "hun",
+        viewbox: "",
+        style: "",
+        svg: "",
       };
     } else if (mag === "doz") {
       if (!invert) {
         t = {
           name: "doz_down",
-          style: `fill: ${palette[6]};`,
-          svg: `<g>
-          <rect class="e" x=".75" y=".75" width="25.67" height="12.08"/>
-          <path class="e" d="M25.67,1.5v10.58H1.5V1.5h24.17M27.17,0H0v13.58h27.17V0h0Z"/>
-        </g>
-        <line class="d" x1="27.17" y1="26.38" x2="0" y2="26.38"/>`,
+          viewbox: "",
+          style: "",
+          svg: "",
         };
       } else {
         t = {
           name: "doz_up",
-          style: `fill: ${palette[5]};`,
-          svg: `<g>
-          <rect class="e" x=".75" y="14.29" width="25.67" height="12.08"/>
-          <path class="e" d="M25.67,15.04v10.58H1.5v-10.58h24.17M27.17,13.54H0v13.58h27.17v-13.58h0Z"/>
-        </g>
-        <line class="d" y1=".75" x2="27.17" y2=".75"/>`,
+          viewbox: "",
+          style: "",
+          svg: "",
         };
       }
-    } else if (mag === "hun") {
-      t = {
-        name: "hun",
-        style: `fill: ${palette[5]};`,
-        svg: `<polygon class="d" points="5.64 13.58 13.58 5.64 21.53 13.58 13.58 21.53 5.64 13.58"/>`,
-      };
     } else if (mag === "uni") {
       t = {
         name: "uni",
+        viewbox: "0 0 27.1698 27.1698",
         style: `fill: ${palette[5]};`,
-        svg: `<g>
-        <polygon class="d" points=".75 2.71 7.28 13.58 .75 24.46 .75 2.71"/>
-        <path class="d" d="M1.5,5.42l4.9,8.17L1.5,21.75V5.42M0,0v27.17l8.15-13.58L0,0h0Z"/>
-      </g>
-      <g>
-        <polygon class="d" points="19.89 13.58 26.42 2.71 26.42 24.46 19.89 13.58"/>
-        <path class="d" d="M25.67,5.42v16.34l-4.9-8.17,4.9-8.17M27.17,0l-8.15,13.58,8.15,13.58V0h0Z"/>
+        svg: `<g id="c" data-name="Layer 1">
+        <polygon class="d" points="5.64065 13.58486 13.5849 5.64064 21.52915 13.58486 13.5849 21.52928 5.64065 13.58486"/>
       </g>`,
       };
     }

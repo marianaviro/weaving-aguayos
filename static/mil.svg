@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.17 27.17">
+<svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.1698 27.16968">
   <defs>
     <style>
       .d {
@@ -9,6 +9,13 @@
     </style>
   </defs>
   <g id="c" data-name="Layer 1">
-    <polygon class="d" points="5.64 13.58 13.58 5.64 21.53 13.58 13.58 21.53 5.64 13.58"/>
+    <g>
+      <polygon class="d" points=".74976 2.70801 7.27612 13.58496 .74976 24.46191 .74976 2.70801"/>
+      <path class="d" d="M1.5,5.41553l4.90161,8.16943L1.5,21.75415V5.41553M0,0v27.16968l8.15088-13.58472L0,0h0Z"/>
+    </g>
+    <g>
+      <polygon class="d" points="19.89429 13.58496 26.41968 2.70801 26.41968 24.46191 19.89429 13.58496"/>
+      <path class="d" d="M25.6698,5.41553v16.33887l-4.90173-8.16943,4.90173-8.16943M27.1698,0l-8.151,13.58496,8.151,13.58472V0h0Z"/>
+    </g>
   </g>
 </svg>
