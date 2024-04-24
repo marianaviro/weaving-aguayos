@@ -8,11 +8,11 @@ export const nodes = [
 	() => import('./nodes/4')
 ];
 
-export const server_loads = [];
+export const server_loads = [2];
 
 export const dictionary = {
 		"/": [3],
-		"/[slug]": [~4,[2]]
+		"/[slug]": [4,[2]]
 	};
 
 export const hooks = {

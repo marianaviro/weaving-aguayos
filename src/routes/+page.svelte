@@ -50,53 +50,55 @@
 
   <div class="container">
     {#each countries as c (c)}
-      <a
-        href="/{c
-          .toLowerCase()
-          .replace(/\s+/g, '-')
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .replace(/[^\w-]+/g, '')}"
-      >
-        <p class="name">{c.toLowerCase()}</p>
-        <div
-          class="country"
-          id={c}
-          in:draw={{ duration: 1000 }}
-          style={`background-color: ${
-            palette(groupedData.get(c)[0].dest_subregion)[7]
-          }; border-top: 7px solid ${
-            palette(groupedData.get(c)[0].dest_subregion)[4]
-          }; border-bottom: 7px solid ${
-            palette(groupedData.get(c)[0].dest_subregion)[4]
-          };`}
+      <div class="link">
+        <a
+          href="/{c
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^\w-]+/g, '')}"
         >
-          <svg {width} {height}>
-            <g transform={`translate(${padding.left}, ${padding.top})`}>
-              {#each groupedData
-                .get(c)
-                .sort((a, b) => b["2020"] - a["2020"]) as country, i (i)}
-                <g class="column">
-                  {#each magnitude(country["2020"], padding.top, padding.bottom) as tile, j (j)}
-                    <g
-                      transform={`translate(${tileSize * i}, ${tileSize * j})`}
-                    >
-                      <rect
-                        width={tileSize}
-                        height={tileSize}
-                        fill={tile.empty
-                          ? palette(country.dest_subregion)[7]
-                          : icon(tile.mag, palette(country.orig_subregion))
-                              .color}
-                      />
-                    </g>
-                  {/each}
-                </g>
-              {/each}
-            </g>
-          </svg>
-        </div>
-      </a>
+          <p class="name">{c.toLowerCase()}</p>
+          <div
+            class="country"
+            id={c}
+            in:draw={{ duration: 1000 }}
+            style={`background-color: ${
+              palette(groupedData.get(c)[0].dest_subregion)[7]
+            }; border-top: 7px solid ${
+              palette(groupedData.get(c)[0].dest_subregion)[4]
+            }; border-bottom: 7px solid ${
+              palette(groupedData.get(c)[0].dest_subregion)[4]
+            };`}
+          >
+            <svg {width} {height}>
+              <g transform={`translate(${padding.left}, ${padding.top})`}>
+                {#each groupedData
+                  .get(c)
+                  .sort((a, b) => b["2020"] - a["2020"]) as country, i (i)}
+                  <g class="column">
+                    {#each magnitude(country["2020"], padding.top, padding.bottom) as tile, j (j)}
+                      <g
+                        transform={`translate(${tileSize * i}, ${tileSize * j})`}
+                      >
+                        <rect
+                          width={tileSize}
+                          height={tileSize}
+                          fill={tile.empty
+                            ? palette(country.dest_subregion)[7]
+                            : icon(tile.mag, palette(country.orig_subregion))
+                                .color}
+                        />
+                      </g>
+                    {/each}
+                  </g>
+                {/each}
+              </g>
+            </svg>
+          </div>
+        </a>
+      </div>
     {/each}
   </div>
 </div>
@@ -130,8 +132,22 @@
   .desc_container {
     min-width: 300px;
   }
-  a {
-    padding: 40px 0px;
+
+  .link {
+    padding: 2em 0;
+    position: relative;
+    left: 15px;
+    transition: transform 500ms;
+  }
+  .link:hover {
+    cursor: pointer;
+    font-style: italic;
+    transform: translate(-5px, -5px);
+    transition: transform 500ms;
+  }
+  .link a {
+    width: 100%;
+    height: 100%;
     text-decoration: none !important;
   }
   a p.name {
@@ -171,7 +187,6 @@
     box-shadow: #d3d2d1 10px 10px;
   }
   a:hover {
-    font-weight: bold;
   }
   @media (max-width: 760px) {
     .countries {
