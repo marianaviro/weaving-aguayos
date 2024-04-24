@@ -1,6 +1,9 @@
 <script>
+  import { fade } from "svelte/transition";
   import "../styles.css";
   export let data;
+
+  // data setup
   let summary = {
     name: data.country[0]?.destination,
     migrants: data.country?.reduce((prev, curr) => {
@@ -10,32 +13,50 @@
     }, 0),
     countries: data.country.length,
   };
+
+  // sidebar setup
+  let cw;
+  $: large = cw > 800 ? true : false;
+  let open = false;
+  $: min_w = open ? 300 : 120;
+  function handleClick() {
+    open = !open;
+    console.log(open);
+  }
 </script>
 
-<div class="layout">
+<div class="layout" bind:clientWidth={cw}>
   <div class="sidebar">
-    <div class="link">
+    <div class="cell link">
       <a href="/">
         {`< all countries`}
       </a>
     </div>
-    <div class="link">
-      <p class="name">
-        {summary.name}
-      </p>
-      <p class="text">welcomed</p>
-      <p class="figure">
-        <b>{`${summary.migrants.toLocaleString("en-US")}`}</b>
-        migrants
-      </p>
-      <p class="figure">
-        from
-        <b>{`${summary.countries}`}</b>
-        countries
-      </p>
-      <p class="year">in 2020</p>
-    </div>
-    <div class="spacer"></div>
+    {#if open || large}
+      <div class="cell desc" transition:fade={{ duration: 250 }}>
+        <p class="name">
+          {summary?.name}
+        </p>
+        <p class="text">welcomed</p>
+        <p class="figure">
+          <b>{`${summary?.migrants.toLocaleString("en-US")}`}</b>
+          migrants
+        </p>
+        <p class="figure">
+          from
+          <b>{`${summary?.countries}`}</b>
+          countries
+        </p>
+        <p class="year">in 2020</p>
+      </div>
+    {/if}
+    {#if !large}
+      <div class="cell close">
+        <button class="toggle" on:click={() => handleClick()}
+          >{`[${open ? "close x" : "info +"}]`}</button
+        >
+      </div>
+    {/if}
   </div>
   <main>
     <slot />
@@ -46,13 +67,17 @@
   .name {
     font-weight: bold;
   }
-  .spacer {
-    height: 10vh;
+  .close {
+    text-align: right;
   }
-  .link {
-    padding: 1.5em;
+  .cell {
     position: relative;
     left: 0px;
+  }
+  .desc {
+    padding: 3em 1.5em 1.5em 1.5em;
+  }
+  .link {
     transition: transform 500ms;
   }
   .link a {
@@ -68,15 +93,22 @@
     overflow-x: hidden;
   }
   .sidebar {
+    padding: 2em;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-width: 200px;
   }
   .sidebar a {
     text-align: left;
     text-decoration: none;
     color: black;
+  }
+  .sidebar button.toggle {
+    border: none;
+    background-color: #f6f3ef;
+    text-align: left;
+    cursor: pointer;
   }
   .link:hover {
     cursor: pointer;
@@ -88,10 +120,14 @@
     .layout {
       flex-direction: row;
     }
-    .link {
-      padding: 1em;
+    .cell {
+      padding: 1em 3em 1em 1em;
       position: relative;
       left: 15px;
+    }
+    .sidebar {
+      width: 25%;
+      min-width: 200px;
     }
   }
 </style>

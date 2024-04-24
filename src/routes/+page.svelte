@@ -19,32 +19,42 @@
   let tileSize = width / (33 + paddingX);
 
   // sidebar setup
-  let open = true;
-  $: min_w = open ? 300 : 120;
+  let cw;
+  $: large = cw > 800 ? true : false;
+  let open = false;
   function handleClick() {
     open = !open;
     console.log(open);
   }
 </script>
 
-<div class="countries">
-  <div class="sidebar">
+<div class="countries" bind:clientWidth={cw}>
+  <div class="sidebar" id="sidebar">
     <div class="desc_container">
-      <button class="toggle" on:click={() => handleClick()}>aguayos.wav</button>
+      <p class="logo">aguayos.weav</p>
     </div>
-    <div class="desc_container">
-      <p class="description">
-        migration within latin american countries has been a source of
-        connection between cultures that has influenced our communities in
-        unique ways. migration within latin american countries has been a source
-        of connection between cultures that has influenced our communities in
-        unique ways.
-      </p>
-    </div>
-    <div class="desc_container">
-      <p class="data">data: UN migration stock 2020</p>
-      <p class="author">author: mariana villamizar</p>
-      <p class="date">apr 2024</p>
+    {#if open}
+      <div transition:fade={{ duration: 250 }}>
+        <div class="cell">
+          <p class="description">
+            migration within latin american countries has been a source of
+            connection between cultures that has influenced our communities in
+            unique ways. migration within latin american countries has been a
+            source of connection between cultures that has influenced our
+            communities in unique ways.
+          </p>
+        </div>
+        <div class="cell">
+          <p class="data"><b>data:</b> UN migration stock 2020</p>
+          <p class="author"><b>author:</b> mariana villamizar</p>
+          <p class="date"><b>date:</b> apr 2024</p>
+        </div>
+      </div>
+    {/if}
+    <div class="desc_container close">
+      <button class="toggle" on:click={() => handleClick()}
+        >{`[${open ? "close x" : "about +"}]`}</button
+      >
     </div>
   </div>
 
@@ -104,17 +114,34 @@
 </div>
 
 <style>
+  .sidebar {
+    transition:
+      height 2s,
+      width 2s;
+  }
+  .close {
+    text-align: right;
+  }
+  .countries {
+    display: flex;
+    flex-direction: column;
+  }
+  .container {
+    flex: 1;
+    overflow-x: hidden;
+  }
+  .sidebar {
+    padding: 2em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 200px;
+  }
   .data,
   .author,
   .date {
     font-style: italic;
-  }
-  .sidebar {
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
-    gap: 3em;
-    justify-content: start;
   }
   .sidebar button.toggle {
     border: none;
@@ -125,25 +152,23 @@
   .sidebar .description {
     text-align: left;
   }
-  .toggle {
+  .logo {
     font-style: italic;
     font-weight: bold;
   }
-  .desc_container {
-    min-width: 300px;
-  }
-
   .link {
     padding: 2em 0;
     position: relative;
-    left: 15px;
-    transition: transform 500ms;
+    left: 0px;
+    transition: transform 250ms;
+    transition-timing-function: ease-in-out;
   }
   .link:hover {
     cursor: pointer;
     font-style: italic;
     transform: translate(-5px, -5px);
-    transition: transform 500ms;
+    transition: transform 250ms;
+    transition-timing-function: ease-in-out;
   }
   .link a {
     width: 100%;
@@ -151,23 +176,19 @@
     text-decoration: none !important;
   }
   a p.name {
-    text-decoration: none !important;
-    text-decoration-style: none !important;
     color: black;
     margin-bottom: 10px;
   }
   .countries {
-    padding: 2em;
     height: 100vh;
     width: 100vw;
     display: flex;
-    flex-direction: row;
-    gap: 3em;
   }
 
   .container {
     display: flex;
     gap: 3em;
+    padding: 3em;
     flex-wrap: wrap;
     flex-direction: row;
     scroll-behavior: smooth;
@@ -182,18 +203,25 @@
     padding: 0px;
     box-shadow: #d3d2d1 0px 0px;
   }
+  .cell {
+    padding: 3em 1.5em 1.5em 1.5em;
+  }
 
   .country:hover {
     box-shadow: #d3d2d1 10px 10px;
   }
-  a:hover {
-  }
-  @media (max-width: 760px) {
+  @media screen and (min-width: 800px) {
     .countries {
-      flex-direction: column;
+      flex-direction: row;
+    }
+    .desc_container {
+      padding: 1em 3em 1em 1em;
+      position: relative;
+      left: 15px;
     }
     .sidebar {
-      justify-content: space-around;
+      width: 25%;
+      gap: 3em;
     }
   }
 </style>

@@ -22,11 +22,6 @@
   let width = 1440;
   let height = 800;
 
-  // $: x = d3
-  //   .scaleLinear()
-  //   .domain([0, 48 + padding.right])
-  //   .range([0, width]);
-
   $: y = d3
     .scaleLinear()
     .domain([0, 13 + padding.top + padding.bottom])
