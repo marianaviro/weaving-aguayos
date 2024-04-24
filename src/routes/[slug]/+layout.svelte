@@ -21,7 +21,6 @@
   $: min_w = open ? 300 : 120;
   function handleClick() {
     open = !open;
-    console.log(open);
   }
 </script>
 
