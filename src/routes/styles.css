@@ -1,12 +1,15 @@
 @font-face {
-  font-family: 'Inconsolata';
-  src: url('./Inconsolata.otf') format('otf'),
-  /* Add additional font formats if needed */
+    font-family: 'Inconsolata';
+    src: url('./Inconsolata.otf') format("opentype");
 }
 
 /* Example of using the imported font */
 body {
-  font-family: 'Inconsolata', mono;
+    /* font-family: logic-monospace, mono; */
+    font-family: 'Inconsolata';
+font-weight: 400;
+font-style: normal;
+font-size: 1em;
 }
 
 /* CSS Reset from https://www.joshwcomeau.com/css/custom-css-reset/ */
