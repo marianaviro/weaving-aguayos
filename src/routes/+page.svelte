@@ -21,7 +21,7 @@
   // sidebar setup
   let cw;
   $: large = cw > 800 ? true : false;
-  let open = false;
+  let open = true;
   function handleClick() {
     open = !open;
     console.log(open);
@@ -37,11 +37,11 @@
       <div transition:fade={{ duration: 250 }}>
         <div class="cell">
           <p class="description">
-            migration within latin american countries has been a source of
-            connection between cultures that has influenced our communities in
-            unique ways. migration within latin american countries has been a
-            source of connection between cultures that has influenced our
-            communities in unique ways.
+            Latin American countries have a long history of welcoming migrants
+            from neighboring territories. As a result, our cultures have become
+            intertwined. These aguayos, as a tribute to Andean weaving
+            practices, aim to reflect the interweaving of cultures that
+            migration fosters.
           </p>
         </div>
         <div class="cell">

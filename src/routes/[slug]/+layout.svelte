@@ -17,7 +17,7 @@
   // sidebar setup
   let cw;
   $: large = cw > 800 ? true : false;
-  let open = false;
+  let open = true;
   $: min_w = open ? 300 : 120;
   function handleClick() {
     open = !open;
