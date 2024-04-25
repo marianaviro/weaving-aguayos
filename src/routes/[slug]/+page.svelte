@@ -18,7 +18,8 @@
   let bg = palette(dest_subregion)[7];
 
   // interaction
-  let legend = true;
+  let legend = false;
+  let show = true;
   let currentCountry;
   let ci;
   let cj;
@@ -37,6 +38,7 @@
     : {};
 
   function handleHover(e) {
+    show = false;
     let i = e.target.id?.split(" ")[0];
     let j = e.target.id?.split(" ")[1];
     currentCountry = countries[i]?.origin;
@@ -45,7 +47,12 @@
   }
 
   function toggleLegend() {
+    show = true;
     legend = !legend;
+  }
+
+  function showAll() {
+    show = true;
   }
 
   let width = 1440;
@@ -70,7 +77,7 @@
       people
     </p>
     <p class="text">migrated from</p>
-    <p class="text">
+    <p class="ori-des">
       <b>{tooltip?.country}</b> to <b>{name}</b>
     </p>
     <p class="year">in 2020</p>
@@ -100,13 +107,19 @@
           class="column"
           on:mouseover={handleHover}
           on:focus={handleHover}
+          on:mouseout={showAll}
+          on:blur={showAll}
           aria-label={`${c.origin}`}
           role="presentation"
         >
           {#each magnitude(c["2020"], padding.top, padding.bottom) as tile, j (j)}
             <g
               transform={`translate(${size * i}, ${y(j)})`}
-              opacity={!legend || (legend && !tile.down && ci == i) ? 1 : 0.3}
+              opacity={!legend ||
+              (legend && !tile.down && ci == i) ||
+              (show && !tile.down)
+                ? 1
+                : 0.3}
             >
               <rect
                 id={`${i} ${j}`}
@@ -202,9 +215,13 @@
   button.legend:hover {
     opacity: 1;
   }
+  .ori-des {
+  }
   .text,
   .year {
     font-style: italic;
+    opacity: 0.5;
+    font-weight: 300;
   }
   .tooltip,
   .legend {

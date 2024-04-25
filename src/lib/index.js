@@ -60,7 +60,7 @@ export const magnitude = (num, ptop, pbottom) => {
     } else if (upperBound <= i && i < lowerBound) {
       mags[i] = {
         "mag": ms[i - upperBound],
-        "empty": !(i - upperBound < pos),
+        "empty": !(i - upperBound + 1 < pos),
         "down": true,
       };
     } else if (lowerBound <= i && i < l) {
