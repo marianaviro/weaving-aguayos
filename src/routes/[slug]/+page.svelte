@@ -18,16 +18,34 @@
   let bg = palette(dest_subregion)[7];
 
   // interaction
+  let legend = true;
   let currentCountry;
   let ci;
+  let cj;
+  let magnitudes = [
+    "< 1",
+    "< 10",
+    "< 100",
+    "< 1000",
+    "< 10,000",
+    "< 100,000",
+    "<1,000,000",
+    "Migrants welcomed:",
+  ];
   $: tooltip = currentCountry
     ? { "country": currentCountry, "migrants": countries[ci]["2020"] }
     : {};
 
   function handleHover(e) {
     let i = e.target.id?.split(" ")[0];
+    let j = e.target.id?.split(" ")[1];
     currentCountry = countries[i]?.origin;
     ci = i;
+    cj = j;
+  }
+
+  function toggleLegend() {
+    legend = !legend;
   }
 
   let width = 1440;
@@ -41,7 +59,11 @@
   $: size = y(1);
 </script>
 
-<div class="tooltip">
+<!-- Tooltip -->
+<div
+  class={legend ? "tooltip unfocused" : "tooltip"}
+  opacity={legend ? 0.5 : 1}
+>
   {#if currentCountry}
     <p class="figure">
       <b>{`${tooltip.migrants?.toLocaleString("en-US")}`}</b>
@@ -55,6 +77,14 @@
   {:else}<p class="text">(hover over the weaving)</p>{/if}
 </div>
 
+<!-- Legend -->
+<button class="legend" on:click={toggleLegend} on:keydown={toggleLegend}>
+  <p class="text">
+    {legend ? "[hide legend -]" : "[show legend +]"}
+  </p>
+</button>
+
+<!-- Aguayo -->
 <div
   class="country"
   id={name}
@@ -74,7 +104,10 @@
           role="presentation"
         >
           {#each magnitude(c["2020"], padding.top, padding.bottom) as tile, j (j)}
-            <g transform={`translate(${size * i}, ${y(j)})`}>
+            <g
+              transform={`translate(${size * i}, ${y(j)})`}
+              opacity={!legend || (legend && !tile.down && ci == i) ? 1 : 0.3}
+            >
               <rect
                 id={`${i} ${j}`}
                 width={size}
@@ -82,7 +115,8 @@
                 fill={tile.empty
                   ? bg
                   : icon(tile.mag, palette(c.orig_subregion)).color}
-                style={`filter: brightness(${ci == i ? 1.2 : 1})`}
+                style={`filter: brightness(${ci == i && !legend ? 1.3 : 1}); transition: filter 150ms;
+                transition-timing-function: ease-out;`}
               />
               {#if !tile.empty}
                 <g
@@ -107,28 +141,81 @@
               {/if}
             </g>
           {/each}
+          <!-- Countries -->
+          <text
+            x={size * (i + 1) - 7}
+            y={height - 30}
+            opacity={ci == i ? 1 : 0.1}
+            style={`transition: opacity 100ms;
+              transition-timing-function: ease-out;`}
+            fill="#f6f3ef"
+            transform={`rotate(-90, ${size * (i + 1) - 7}, ${height - 30})`}
+            >{c.origin}</text
+          >
         </g>
+      {/each}
+    </g>
+    <!-- Magnitudes -->
+    <g
+      opacity={legend ? 1 : 0}
+      transform={`translate(${padding.left}, ${padding.top})`}
+      style="transition: opacity 250ms;"
+    >
+      {#each magnitudes as mag, k}
+        <!-- <text
+          y={height / 2 - size * k + 5 - size / 2}
+          x={size * (countries.length + 2) - 150}
+          fill="#f6f3ef">{mag}</text
+        > -->
+        <text
+          y={height / 2 - size * (k + 1) + 6}
+          x="20"
+          fill="#f6f3ef"
+          font-size="0.85em">{mag}</text
+        >
+        <line
+          x1="0"
+          x2={size * countries.length}
+          y1={height / 2 - size * k + size / 2}
+          y2={height / 2 - size * k + size / 2}
+          stroke="#f6f3ef"
+          stroke-width="0.5"
+          stroke-dasharray={k == 0 ? "" : "0.5 3"}
+          stroke-linecap="round"
+        />
       {/each}
     </g>
   </svg>
 </div>
 
 <style>
-  .name {
-    font-weight: bold;
+  .unfocused {
+    opacity: 0.1;
+  }
+  button.legend {
+    border: none;
+    background-color: transparent;
+    text-align: left;
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  button.legend:hover {
+    opacity: 1;
   }
   .text,
   .year {
     font-style: italic;
   }
-  .tooltip {
+  .tooltip,
+  .legend {
     position: fixed;
-    bottom: 2em;
-    right: 2em;
+    top: 5em;
+    padding-left: 2em;
     text-align: left;
     min-width: 150px;
-    z-index: 999;
+    z-index: 10;
     color: white;
+    transition: opacity 250ms;
   }
   svg {
     max-width: 1440px;
@@ -147,5 +234,13 @@
     transition:
       x 250ms,
       y 250ms;
+  }
+  @media screen and (min-width: 640px) {
+    .tooltip {
+      top: 3.5em;
+    }
+    .legend {
+      right: 2em;
+    }
   }
 </style>

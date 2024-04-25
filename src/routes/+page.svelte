@@ -1,7 +1,7 @@
 <script>
   import "./styles.css";
   import * as d3 from "d3";
-  import { fade, draw, fly } from "svelte/transition";
+  import { fade, draw } from "svelte/transition";
   import { icon, palette, magnitude } from "$lib/index.js";
 
   // data setup
@@ -9,6 +9,7 @@
   let dataset = data.dataset;
   let groupedData = d3.group(dataset, (d) => d.destination);
   let countries = [...groupedData.keys()];
+  countries.sort();
 
   // design setup
   let paddingX = 5;
@@ -24,7 +25,6 @@
   let open = true;
   function handleClick() {
     open = !open;
-    console.log(open);
   }
 </script>
 

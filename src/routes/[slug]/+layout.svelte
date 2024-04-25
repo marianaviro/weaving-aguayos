@@ -92,6 +92,7 @@
     overflow-x: hidden;
   }
   .sidebar {
+    background-color: #f6f3ef;
     padding: 2em;
     width: 100%;
     display: flex;

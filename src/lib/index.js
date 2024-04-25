@@ -33,8 +33,8 @@ export const palette = (subreg) => {
 
 export const magnitude = (num, ptop, pbottom) => {
   // setup magnitudes
-  let ms = ["uni", "doz", "hun", "tho", "doz_tho", "hun_tho", "mil"];
-  let ms_inv = ["mil", "hun_tho", "doz_tho", "tho", "hun", "doz"];
+  let ms = ["doz", "hun", "tho", "doz_tho", "hun_tho", "mil"];
+  let ms_inv = ["mil", "hun_tho", "doz_tho", "tho", "hun", "doz", "uni"];
 
   // extract magnitude of num
   let snum = num + "";
@@ -49,20 +49,22 @@ export const magnitude = (num, ptop, pbottom) => {
   let mags = [];
   for (let i = 0; i < l; i++) {
     if (i < ptop) {
-      mags[i] = { "mag": "pad", "empty": true };
+      mags[i] = { "mag": "pad", "empty": true, "down": false };
     } else if (ptop <= i && i < upperBound) {
       let j = i - ptop;
       mags[i] = {
         "mag": ms_inv[i - ptop],
         "empty": j < 7 - pos,
+        "down": false,
       };
     } else if (upperBound <= i && i < lowerBound) {
       mags[i] = {
         "mag": ms[i - upperBound],
         "empty": !(i - upperBound < pos),
+        "down": true,
       };
     } else if (lowerBound <= i && i < l) {
-      mags[i] = { "mag": "pad", "empty": true };
+      mags[i] = { "mag": "pad", "empty": true, "down": false };
     }
   }
   return mags;
