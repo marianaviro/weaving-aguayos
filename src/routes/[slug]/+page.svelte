@@ -4,7 +4,7 @@
   import { palette, magnitude, icon, texture } from "$lib/index.js";
 
   // set up data
-  export let data;
+  let { data } = $props();
   let countries = data.country.sort((a, b) => b["2020"] - a["2020"]);
 
   // set up info
@@ -18,11 +18,11 @@
   let bg = palette(dest_subregion)[7];
 
   // interaction
-  let legend = false;
-  let show = true;
-  let currentCountry;
-  let ci;
-  let cj;
+  let legend = $state(false);
+  let show = $state(true);
+  let currentCountry = $state();
+  let ci = $state();
+  let cj = $state();
   let magnitudes = [
     "< 1",
     "< 10",
@@ -33,9 +33,11 @@
     "<1,000,000",
     "Migrants welcomed:",
   ];
-  $: tooltip = currentCountry
-    ? { "country": currentCountry, "migrants": countries[ci]["2020"] }
-    : {};
+  let tooltip = $derived(
+    currentCountry
+      ? { "country": currentCountry, "migrants": countries[ci]["2020"] }
+      : {}
+  );
 
   function handleHover(e) {
     show = false;
@@ -55,15 +57,17 @@
     show = true;
   }
 
-  let width = 1440;
-  let height = 800;
+  let width = $state(1440);
+  let height = $state(800);
 
-  $: y = d3
-    .scaleLinear()
-    .domain([0, 13 + padding.top + padding.bottom])
-    .range([0, height]);
+  let y = $derived(
+    d3
+      .scaleLinear()
+      .domain([0, 13 + padding.top + padding.bottom])
+      .range([0, height])
+  );
 
-  $: size = y(1);
+  let size = $derived(y(1));
 </script>
 
 <!-- Tooltip -->
@@ -85,7 +89,7 @@
 </div>
 
 <!-- Legend -->
-<button class="legend" on:click={toggleLegend} on:keydown={toggleLegend}>
+<button class="legend" onclick={toggleLegend} onkeydown={toggleLegend}>
   <p class="text">
     {legend ? "[hide legend -]" : "[show legend +]"}
   </p>
@@ -99,16 +103,20 @@
   bind:clientWidth={width}
   bind:clientHeight={height}
 >
-  <svg width={size * (countries.length + 2)} {height}>
+  <svg
+    width={size * (countries.length + 2)}
+    {height}
+    preserveAspectRatio="xMinYMid"
+  >
     <g transform={`translate(${padding.left}, ${padding.top})`}>
       {#each countries as c, i (i)}
         <g
           id={c.origin}
           class="column"
-          on:mouseover={handleHover}
-          on:focus={handleHover}
-          on:mouseout={showAll}
-          on:blur={showAll}
+          onmouseover={handleHover}
+          onfocus={handleHover}
+          onmouseout={showAll}
+          onblur={showAll}
           aria-label={`${c.origin}`}
           role="presentation"
         >
@@ -245,7 +253,6 @@
     flex: 1;
     min-height: 0;
     max-height: 100vh;
-    overflow-x: scroll;
   }
   rect {
     transition:

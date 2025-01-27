@@ -1,227 +1,247 @@
 <script>
   import "./styles.css";
   import * as d3 from "d3";
-  import { fade, draw } from "svelte/transition";
-  import { icon, palette, magnitude } from "$lib/index.js";
+  import { palette } from "$lib/index.js";
+  import Gallery from "../components/Gallery.svelte";
+  import Cover from "../components/Cover.svelte";
+  import Step from "../components/Step.svelte";
+  import IconScroll from "../components/IconScroll.svelte";
+  import Photo from "../components/Photo.svelte";
 
-  // data setup
-  export let data;
-  let dataset = data.dataset;
-  let groupedData = d3.group(dataset, (d) => d.destination);
-  let countries = [...groupedData.keys()];
-  countries.sort();
+  let { data } = $props();
+  let selectedCountry = $state("");
+  let scrollY = $state(0); // Current scroll position
+  let scrollHeight = $state(0); // Total scrollable height
+  let progress = $state(0); // Scroll progress (0 to 1)
+  let started = $state(false);
+  let zoom = $state(0.75);
 
-  // design setup
-  let paddingX = 5;
-  let paddingY = 8;
-  const padding = { top: paddingY, right: paddingX, bottom: paddingY, left: 0 };
-  let width = 270;
-  let height = 180;
-  let tileSize = width / (33 + paddingX);
+  const handleZoom = (p) => {
+    if (p < 9) {
+      zoom = 0.75;
+    } else if (p >= 9 && p < 13) {
+      // zoom = 1.2;
+      zoom = 1.4;
+    } else if (p >= 13) {
+      zoom = 0.6;
+      // zoom = 0.75;
+    }
+    console.log("Zoom: " + zoom);
+  };
 
-  // sidebar setup
-  let cw;
-  $: large = cw > 800 ? true : false;
-  let open = true;
-  function handleClick() {
-    open = !open;
-  }
+  const handleScroll = () => {
+    scrollY = window.scrollY;
+    scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    progress = scrollHeight ? (scrollY / scrollHeight) * 100 : 0;
+    if (progress > 0) {
+      started = true;
+    } else {
+      started = false;
+    }
+    handleZoom(progress);
+
+    console.log("Scroll Y: " + scrollY);
+    console.log("Scroll Height: " + scrollHeight);
+    console.log("Progress: " + progress);
+  };
+
+  $effect(() => {
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
 </script>
 
-<div class="countries" bind:clientWidth={cw}>
-  <div class="sidebar" id="sidebar">
-    <div class="desc_container">
-      <p class="logo">aguayos.weav</p>
-    </div>
-    {#if open}
-      <div transition:fade={{ duration: 250 }}>
-        <div class="cell">
-          <p class="description">
-            Latin American countries have a long history of welcoming migrants
-            from neighboring territories. As a result, our cultures have become
-            intertwined. These aguayos, as a tribute to Andean weaving
-            practices, aim to reflect the interweaving of cultures that
-            migration fosters.
-          </p>
-        </div>
-        <div class="cell">
-          <p class="data"><b>data:</b> UN migration stock 2020</p>
-          <p class="author"><b>author:</b> mariana villamizar</p>
-          <p class="date"><b>date:</b> apr 2024</p>
+<article>
+  <section id="scrolly">
+    <IconScroll {started} />
+    <div class="background">
+      <div class="visual" style={"background-size: " + 80 * zoom + "vh;"}>
+        <div class="left"></div>
+        <div class="right">
+          <Photo
+            active={progress > 1 && progress <= 6}
+            source="/los-andes.jpg"
+            alt="Los Andes mountain range"
+          />
+          <Photo
+            active={progress > 6 && progress <= 9}
+            source="/tradition.jpg"
+            alt="Incan woman wearing an aguayo to carry their baby"
+          />
         </div>
       </div>
-    {/if}
-    <div class="desc_container close">
-      <button class="toggle" on:click={() => handleClick()}
-        >{`[${open ? "close x" : "about +"}]`}</button
-      >
     </div>
-  </div>
-
-  <div class="container">
-    {#each countries as c (c)}
-      <div class="link">
-        <a
-          href="/{c
-            .toLowerCase()
-            .replace(/\s+/g, '-')
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace(/[^\w-]+/g, '')}"
-        >
-          <p class="name">{c.toLowerCase()}</p>
-          <div
-            class="country"
-            id={c}
-            in:draw={{ duration: 1000 }}
-            style={`background-color: ${
-              palette(groupedData.get(c)[0].dest_subregion)[7]
-            }; border-top: 7px solid ${
-              palette(groupedData.get(c)[0].dest_subregion)[4]
-            }; border-bottom: 7px solid ${
-              palette(groupedData.get(c)[0].dest_subregion)[4]
-            };`}
-          >
-            <svg {width} {height}>
-              <g transform={`translate(${padding.left}, ${padding.top})`}>
-                {#each groupedData
-                  .get(c)
-                  .sort((a, b) => b["2020"] - a["2020"]) as country, i (i)}
-                  <g class="column">
-                    {#each magnitude(country["2020"], padding.top, padding.bottom) as tile, j (j)}
-                      <g
-                        transform={`translate(${tileSize * i}, ${tileSize * j})`}
-                      >
-                        <rect
-                          width={tileSize}
-                          height={tileSize}
-                          fill={tile.empty
-                            ? palette(country.dest_subregion)[7]
-                            : icon(tile.mag, palette(country.orig_subregion))
-                                .color}
-                        />
-                      </g>
-                    {/each}
-                  </g>
-                {/each}
-              </g>
-            </svg>
-          </div>
-        </a>
+    <div id="foreground" class="foreground">
+      <div class="step-container">
+        <Cover
+          content={{
+            title: "When Threads Move",
+            intro:
+              "The beauty of migratory flows within Latin America and the Caribbean",
+            author: "by Mariana Villamizar, Jan 2024",
+          }}
+        />
+        <Step
+          content={{
+            subtitle: "",
+            text: "On the Andean mountain range, the largest in the world and the backbone of the Americas, the Aymara people created the aguayos, a beautiful centuries-old form of storytelling through fabric.",
+          }}
+        />
+        <Step
+          content={{
+            subtitle: "",
+            text: "Aguayos are used for carrying babies and transporting goods, and are worn as a symbol of Andean culture.",
+          }}
+        />
+        <Step
+          content={{
+            subtitle: "",
+            text: "Each color, pattern, and technique used to weave an aguayo has its own meaning, resulting in hundreds of traditional designs each with its own significance.",
+          }}
+        />
+        <Step
+          content={{
+            subtitle: "",
+            text: "Each artisan chooses from those designs to encode their stories and those of their communities, resulting in interwoven design fabrics conveying not only the artisan's own dexterity but their traditions",
+          }}
+        />
+        <Step
+          content={{
+            subtitle: "",
+            text: "What if countries were fabrics? What if migration was weaving cultures? What if each migrant was a thread encoding stories, traditions, and knowledge?",
+          }}
+        />
+        <Step
+          content={{
+            subtitle:
+              "This project is a tribute to the beauty of these weavings, to Latin America and the Caribbean, to migration.",
+            text: "",
+          }}
+        />
       </div>
-    {/each}
+    </div>
+  </section>
+  <section id="gallery"><Gallery {data} bind:selectedCountry /></section>
+  <div class="header container">
+    <p class="title">How to read this:</p>
+    <p>
+      A country’s aguayo shows the magnitude of people migrating from different
+      countries of origin. Click or hover over a column to learn the exact
+      number of migrants.
+    </p>
   </div>
-</div>
+</article>
 
 <style>
-  .sidebar {
-    transition:
-      height 2s,
-      width 2s;
-  }
-  .close {
-    text-align: right;
-  }
-  .countries {
+  article {
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
     flex-direction: column;
   }
-  .container {
-    flex: 1;
-    overflow-x: hidden;
-  }
-  .sidebar {
-    padding: 2em;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-width: 200px;
-  }
-  .data,
-  .author,
-  .date {
-    font-style: italic;
-  }
-  .sidebar button.toggle {
-    border: none;
-    background-color: #f6f3ef;
-    text-align: left;
-    cursor: pointer;
-  }
-  .sidebar .description {
-    text-align: left;
-  }
-  .logo {
-    font-style: italic;
-    font-weight: bold;
-  }
-  .link {
-    padding: 2em 0;
+  #scrolly {
     position: relative;
-    left: 0px;
-    transition: transform 250ms;
-    transition-timing-function: ease-in-out;
-  }
-  .link:hover {
-    cursor: pointer;
-    font-style: italic;
-    transform: translate(-5px, -5px);
-    transition: transform 250ms;
-    transition-timing-function: ease-in-out;
-  }
-  .link a {
-    width: 100%;
-    height: 100%;
-    text-decoration: none !important;
-  }
-  a p.name {
-    color: black;
-    margin-bottom: 10px;
-  }
-  .countries {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
+    padding: 0;
   }
 
-  .container {
+  .background {
+    width: 100%;
+    height: 100svh;
+    position: sticky;
+    display: -webkit-box;
     display: flex;
-    gap: 3em;
-    padding: 3em;
-    flex-wrap: wrap;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    top: 0;
+    -webkit-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: all;
+  }
+
+  .foreground {
+    pointer-events: none;
+    /* width: 100%; */
+    margin-top: -100vh;
+    margin-left: 0;
+  }
+
+  .step-container {
+    position: relative;
+    z-index: 99;
+    pointer-events: none;
+  }
+
+  .visual {
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
     flex-direction: row;
-    scroll-behavior: smooth;
-    justify-content: space-around;
-    word-break: break-word;
+    position: relative;
+    pointer-events: none;
+    background-image: url("/home.svg");
+    background-position: top left;
+    transition: all 1s ease-in-out;
+    -webkit-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
   }
 
-  .country {
+  .visual .left {
+    width: 0;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .visual .right {
     width: 100%;
     height: 100%;
-    border-radius: 1px;
-    padding: 0px;
-    box-shadow: #d3d2d1 0px 0px;
-  }
-  .cell {
-    padding: 3em 1.5em 1.5em 1.5em;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    pointer-events: none;
   }
 
-  .country:hover {
-    box-shadow: #d3d2d1 10px 10px;
-  }
   @media screen and (min-width: 800px) {
-    .countries {
-      flex-direction: row;
+    .foreground {
+      margin-left: 2em;
     }
-    .desc_container {
-      padding: 1em 3em 1em 1em;
+
+    .background {
+      width: 100%;
+      height: 100svh;
+      position: sticky;
+      pointer-events: none;
+    }
+
+    .visual {
+      background-position: top left;
+    }
+
+    .visual .left {
+      width: 350px;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .visual .right {
+      width: calc(100% - 350px);
+      height: 100%;
       position: relative;
-      left: 15px;
-    }
-    .sidebar {
-      width: 25%;
-      gap: 3em;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 </style>
