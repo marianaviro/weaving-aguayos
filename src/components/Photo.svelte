@@ -30,7 +30,7 @@
   @media screen and (min-width: 800px) {
     .photo img {
       max-height: 80vh;
-      max-width: 90vw;
+      max-width: 80vw;
     }
 
     .photo {

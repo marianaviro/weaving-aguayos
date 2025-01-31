@@ -32,12 +32,13 @@
 </script>
 
 <div class="layout" bind:clientWidth={cw}>
+  <div class="back">
+    <a href="/#gallery">
+      {`< Back to countries`}
+    </a>
+  </div>
+
   <div class="sidebar">
-    <div class="cell link">
-      <a href="/">
-        {`< all countries`}
-      </a>
-    </div>
     {#if open || large}
       <div class="cell desc" transition:fade={{ duration: 250 }}>
         <p class="name">
@@ -56,13 +57,6 @@
         <p class="year">in 2020</p>
       </div>
     {/if}
-    {#if !large}
-      <div class="cell close">
-        <button class="toggle" onclick={() => handleClick()}
-          >{`[${open ? "close x" : "info +"}]`}</button
-        >
-      </div>
-    {/if}
   </div>
   <main style={`background-color: ${bg}`}>
     {@render children()}
@@ -73,7 +67,7 @@
   .layout {
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
   .name {
     font-weight: bold;
@@ -88,42 +82,46 @@
   .desc {
     padding: 3em 1.5em 1.5em 1.5em;
   }
-  .link {
+  .back {
     transition: transform 500ms;
+    position: fixed;
+    top: 2em;
+    left: 2em;
+    z-index: 999;
   }
-  .link a {
+  .back a {
     width: 100%;
     height: 100%;
-  }
-  main {
-    flex: 1;
-    overflow-x: auto;
-  }
-  .sidebar {
-    background-color: #f6f3ef;
-    padding: 2em;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .sidebar a {
     text-align: left;
     text-decoration: none;
-    color: black;
+    color: #f6f3ef;
   }
-  .sidebar button.toggle {
-    border: none;
-    background-color: #f6f3ef;
-    text-align: left;
-    cursor: pointer;
-  }
-  .link:hover {
+  .back a:hover {
     cursor: pointer;
     font-style: italic;
     transform: translateX(-5px);
     transition: transform 500ms;
   }
+  main {
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .sidebar {
+    background-color: #f6f3ef;
+    padding: 1em 2em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* .sidebar button.toggle {
+    border: none;
+    background-color: #f6f3ef;
+    text-align: left;
+    cursor: pointer;
+  } */
   @media screen and (min-width: 640px) {
     .layout {
       flex-direction: row;
@@ -136,6 +134,17 @@
     .sidebar {
       width: 25%;
       min-width: 200px;
+      padding-top: 5em;
+    }
+
+    .back {
+      top: 2em;
+      left: 2em;
+      z-index: 9999;
+    }
+
+    .back a {
+      color: #3d003b;
     }
   }
 </style>

@@ -1,11 +1,9 @@
 <script>
   import "./styles.css";
-  import * as d3 from "d3";
-  import { palette } from "$lib/index.js";
   import Gallery from "../components/Gallery.svelte";
   import Cover from "../components/Cover.svelte";
-  import Step from "../components/Step.svelte";
-  import IconScroll from "../components/IconScroll.svelte";
+  import Scrolly from "../components/Scrolly.svelte";
+  import Howto from "../components/Howto.svelte";
   import Photo from "../components/Photo.svelte";
 
   let { data } = $props();
@@ -33,7 +31,7 @@
     scrollY = window.scrollY;
     scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     progress = scrollHeight ? (scrollY / scrollHeight) * 100 : 0;
-    if (progress > 0) {
+    if (progress > 2) {
       started = true;
     } else {
       started = false;
@@ -54,7 +52,6 @@
 
 <article>
   <section id="scrolly">
-    <IconScroll {started} />
     <div class="background">
       <div class="visual" style={"background-size: " + 80 * zoom + "vh;"}>
         <div class="left"></div>
@@ -76,73 +73,55 @@
       <div class="step-container">
         <Cover
           content={{
-            title: "When Threads Move",
+            title: "Patrones, Padrões, Patterns",
             intro:
               "The beauty of migratory flows within Latin America and the Caribbean",
             author: "by Mariana Villamizar, Jan 2024",
           }}
+          {started}
         />
-        <Step
-          content={{
-            subtitle: "",
-            text: "On the Andean mountain range, the largest in the world and the backbone of the Americas, the Aymara people created the aguayos, a beautiful centuries-old form of storytelling through fabric.",
-          }}
-        />
-        <Step
-          content={{
-            subtitle: "",
-            text: "Aguayos are used for carrying babies and transporting goods, and are worn as a symbol of Andean culture.",
-          }}
-        />
-        <Step
-          content={{
-            subtitle: "",
-            text: "Each color, pattern, and technique used to weave an aguayo has its own meaning, resulting in hundreds of traditional designs each with its own significance.",
-          }}
-        />
-        <Step
-          content={{
-            subtitle: "",
-            text: "Each artisan chooses from those designs to encode their stories and those of their communities, resulting in interwoven design fabrics conveying not only the artisan's own dexterity but their traditions",
-          }}
-        />
-        <Step
-          content={{
-            subtitle: "",
-            text: "What if countries were fabrics? What if migration was weaving cultures? What if each migrant was a thread encoding stories, traditions, and knowledge?",
-          }}
-        />
-        <Step
-          content={{
-            subtitle:
-              "This project is a tribute to the beauty of these weavings, to Latin America and the Caribbean, to migration.",
-            text: "",
-          }}
-        />
+        <Scrolly />
       </div>
     </div>
   </section>
+  <section id="highlight">
+    <div class="banner">
+      {"This project is a tribute to the beauty of these weavings, to Latin America and the Caribbean, to migration."}
+    </div>
+  </section>
+  <section id="how-to"><Howto /></section>
   <section id="gallery"><Gallery {data} bind:selectedCountry /></section>
-  <div class="header container">
-    <p class="title">How to read this:</p>
-    <p>
-      A country’s aguayo shows the magnitude of people migrating from different
-      countries of origin. Click or hover over a column to learn the exact
-      number of migrants.
-    </p>
-  </div>
+  <section id="footer">
+    <div class="banner">
+      {"Made with 🧡 🇨🇴"}
+    </div>
+  </section>
 </article>
 
 <style>
+  #scrolly {
+    position: relative;
+    padding: 0;
+  }
   article {
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     flex-direction: column;
   }
-  #scrolly {
-    position: relative;
-    padding: 0;
+
+  #highlight .banner {
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  .banner {
+    padding: 3em 2em;
+    background-color: #3d003b;
+    width: 100vw;
+    pointer-events: none;
+    filter: drop-shadow(0 0 5px #47004577);
+    color: #de644c;
   }
 
   .background {

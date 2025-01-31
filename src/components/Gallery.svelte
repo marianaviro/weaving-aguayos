@@ -53,34 +53,44 @@
     }
     return c;
   });
+
+  function clearSearch() {
+    sort = 1;
+    filter = "";
+  }
 </script>
 
 <div class="gallery">
   <div class="controls">
     <button class="toggle" onclick={toggleControls} onkeydown={toggleControls}>
       <p class="text">
-        {visible ? "[ close x ]" : "[ filters + ]"}
+        {visible ? "[ Hide filters - ]" : "[ Show filters + ]"}
       </p>
     </button>
     {#if visible}
       <div class="sortfilter">
         <div class="sorts">
-          <p>sort by:</p>
+          <p>Sort by:</p>
           {#each [1, 2, 3] as sort_type}
             <label>
               <input type="radio" value={sort_type} bind:group={sort} />
               {sort_type === 1
-                ? "migrants welcomed (desc)"
+                ? "Migrants welcomed (Desc)"
                 : sort_type === 2
-                  ? "migrants welcomed (asc)"
-                  : "alphabetical (a to z)"}
+                  ? "Migrants welcomed (Asc)"
+                  : "Alphabetical (A to Z)"}
             </label>
           {/each}
         </div>
         <div class="filters">
-          <p>search:</p>
+          <p>Search:</p>
           <label for="filter"> <input id="filter" bind:value={filter} /></label>
         </div>
+        <button class="toggle" onclick={clearSearch} onkeydown={clearSearch}>
+          <p class={filter == "" ? "text inactive" : "text"}>
+            [ Clear search ]
+          </p>
+        </button>
       </div>
     {/if}
   </div>
@@ -98,7 +108,7 @@
                   .replace(/[\u0300-\u036f]/g, '')
                   .replace(/[^\w-]+/g, '')}"
               >
-                <p class="name">{c.toLowerCase()}</p>
+                <p class="name">{c}</p>
                 <div
                   class="country"
                   id={c}
@@ -148,6 +158,9 @@
 </div>
 
 <style>
+  .controls .text.inactive {
+    opacity: 0.35;
+  }
   .controls {
     z-index: 99;
     position: sticky;
@@ -156,7 +169,7 @@
     align-items: start;
     flex-direction: column;
     justify-content: space-between;
-    padding: 1em 3em 2em 3em;
+    padding: 3em 3em 2em 3em;
     border-bottom: rgba(0, 0, 0, 0.2) solid 0.5px;
     background-color: #f6f3ef;
   }

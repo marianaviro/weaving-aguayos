@@ -38,7 +38,7 @@ export const magnitude = (num, ptop, pbottom) => {
 
   // extract magnitude of num
   let snum = num + "";
-  let pos = snum.length;
+  let pos = num === 0 ? 0 : snum.length;
 
   // setup length of matrix
   let amp = ms.length + ms_inv.length;

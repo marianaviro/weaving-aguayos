@@ -1,21 +1,33 @@
 <script>
   import "../routes/styles.css";
-  let { content } = $props();
+  import IconScroll from "./IconScroll.svelte";
+
+  let { content, started } = $props();
 </script>
 
 <div class="cover">
-  <div class="border"></div>
-  <div class="cover-container">
-    <p class="title">{content.title}</p>
-    <p class="intro">
-      {content.intro}
-    </p>
-    <p class="author">{content.author}</p>
+  <div class="purple">
+    <div class="border"></div>
+    <div class="cover-container">
+      <p class="title">{content.title}</p>
+      <p class="intro">
+        {content.intro}
+      </p>
+      <p class="author">{content.author}</p>
+    </div>
+    <div class="border"></div>
   </div>
-  <div class="border"></div>
+  <div class="white"><IconScroll {started} /></div>
 </div>
 
 <style>
+  .cover .white {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    height: 25vh;
+    background-color: #f5f3ef;
+  }
   .cover .border {
     margin: 0;
     padding: 0;
@@ -25,6 +37,12 @@
     background-size: auto 100%;
     background-color: #3d003b;
   }
+
+  .cover .purple {
+    filter: drop-shadow(0 -3 5px #470045);
+    z-index: 999;
+  }
+
   .cover .cover-container {
     padding: 3rem;
     text-align: left;
@@ -46,11 +64,11 @@
   }
   .cover .title {
     font-weight: bold;
-    color: #de644c;
+    color: #f85230;
     font-size: 1.5rem;
   }
   .cover .intro {
-    color: #fff;
+    color: #f5f3ef;
     font-size: 1rem;
     max-width: 350px;
   }

@@ -21,18 +21,21 @@
 		display: contents;
 	}
 	*, ::before, ::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  vertical-align: baseline;
-}
-html:before {
-  position: fixed;
-  width: 100%; height: 100%;
-  background-color: #ffa339;
-  opacity: .1;
-  pointer-events: none;
-  content: ' ';
-  z-index: 99999;
-}
+  		box-sizing: border-box;
+  		margin: 0;
+  		padding: 0;
+  		vertical-align: baseline;
+	}
+
+	html:before {
+		position: fixed;
+		width: 100%; height: 100%;
+		background-color: #ffa339;
+		background-image: url("/cloth.jpeg");
+		background-blend-mode: soft-light;
+		opacity: 0.15;
+		pointer-events: none;
+		content: ' ';
+		z-index: 99999;
+	}
 </style>

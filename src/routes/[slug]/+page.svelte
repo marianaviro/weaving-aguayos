@@ -24,13 +24,13 @@
   let ci = $state();
   let cj = $state();
   let magnitudes = [
-    "< 1",
-    "< 10",
-    "< 100",
-    "< 1000",
-    "< 10,000",
-    "< 100,000",
-    "<1,000,000",
+    "At least 1 person",
+    "More than 10",
+    "More than 100",
+    "More than 1,000",
+    "More than 10,000",
+    "More than 100,000",
+    "More than 1,000,000",
     "Migrants welcomed:",
   ];
   let tooltip = $derived(
@@ -189,7 +189,7 @@
           fill="#f6f3ef">{mag}</text
         > -->
         <text
-          y={height / 2 - size * (k + 1) + 6}
+          y={height / 2 - size * (k + 1) + 12}
           x="20"
           fill="#f6f3ef"
           font-size="0.85em">{mag}</text
@@ -200,7 +200,7 @@
           y1={height / 2 - size * k + size / 2}
           y2={height / 2 - size * k + size / 2}
           stroke="#f6f3ef"
-          stroke-width="0.5"
+          stroke-width="0.7"
           stroke-dasharray={k == 0 ? "" : "0.5 3"}
           stroke-linecap="round"
         />
@@ -213,14 +213,15 @@
   .unfocused {
     opacity: 0.1;
   }
-  button.legend {
+  .legend {
     border: none;
     background-color: transparent;
     text-align: left;
     cursor: pointer;
     opacity: 0.5;
+    right: 1em;
   }
-  button.legend:hover {
+  .legend:hover {
     opacity: 1;
   }
   .ori-des {
@@ -235,6 +236,7 @@
   .legend {
     position: fixed;
     top: 5em;
+
     padding-left: 2em;
     text-align: left;
     min-width: 150px;
