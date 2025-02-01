@@ -13,10 +13,11 @@
     bottom: 30px; */
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     flex-direction: column;
     z-index: 100;
+    padding-top: 2em;
   }
 
   .scroll-icon.inactive {
@@ -65,8 +66,6 @@
   }
   @media screen and (min-width: 800px) {
     .scroll-icon {
-      display: flex;
-      justify-content: center;
       z-index: 100;
     }
     .bounce {

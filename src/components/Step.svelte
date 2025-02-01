@@ -17,7 +17,7 @@
     max-width: 550px;
     width: auto;
     height: auto;
-    padding: 2em 3em;
+    padding: 3em;
     pointer-events: none;
     text-align: left;
     background-color: #f5f3ef;
@@ -25,13 +25,14 @@
     filter: drop-shadow(0 0 5px #47004577);
   }
   .step .subtitle {
-    color: #de644c;
+    color: #ff6633;
     font-weight: bold;
     font-size: 1.25em;
   }
   .step .body {
-    color: #3d003b;
+    color: #330033;
     font-size: 1em;
+    line-height: 1.7em;
   }
   .step p {
     padding: 0;
@@ -41,9 +42,9 @@
   }
   @media screen and (min-width: 800px) {
     .step {
-      margin: 40vh 0;
-      width: 500px;
-      padding: 2em 4em;
+      margin: 40vh 0 0 2em;
+      width: 600px;
+      padding: 4em;
     }
 
     .visual .left {

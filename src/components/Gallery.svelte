@@ -271,7 +271,7 @@
     text-decoration: none !important;
   }
   a p.name {
-    color: #3d003b;
+    color: #330033;
     margin-bottom: 10px;
   }
   @media screen and (min-width: 917px) {

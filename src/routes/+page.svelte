@@ -5,6 +5,7 @@
   import Scrolly from "../components/Scrolly.svelte";
   import Howto from "../components/Howto.svelte";
   import Photo from "../components/Photo.svelte";
+  import Highlight from "../components/Highlight.svelte";
 
   let { data } = $props();
   let selectedCountry = $state("");
@@ -73,9 +74,9 @@
       <div class="step-container">
         <Cover
           content={{
-            title: "Patrones, Padrões, Patterns",
+            title: "Weaving Migration",
             intro:
-              "The beauty of migratory flows within Latin America and the Caribbean",
+              "Exploring the beauty of migratory flows within Latin America and the Caribbean",
             author: "by Mariana Villamizar, Jan 2024",
           }}
           {started}
@@ -84,11 +85,9 @@
       </div>
     </div>
   </section>
-  <section id="highlight">
-    <div class="banner">
-      {"This project is a tribute to the beauty of these weavings, to Latin America and the Caribbean, to migration."}
-    </div>
-  </section>
+  <Highlight
+    content={"This project is a tribute to the beauty of these weavings, to Latin America and the Caribbean, to migration."}
+  />
   <section id="how-to"><Howto /></section>
   <section id="gallery"><Gallery {data} bind:selectedCountry /></section>
   <section id="footer">
@@ -108,20 +107,6 @@
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     flex-direction: column;
-  }
-
-  #highlight .banner {
-    font-size: 2em;
-    font-weight: bold;
-  }
-
-  .banner {
-    padding: 3em 2em;
-    background-color: #3d003b;
-    width: 100vw;
-    pointer-events: none;
-    filter: drop-shadow(0 0 5px #47004577);
-    color: #de644c;
   }
 
   .background {
@@ -146,13 +131,13 @@
     pointer-events: none;
     /* width: 100%; */
     margin-top: -100vh;
-    margin-left: 0;
   }
 
   .step-container {
     position: relative;
     z-index: 99;
     pointer-events: none;
+    padding: 5em 0 11em 0;
   }
 
   .visual {
@@ -191,10 +176,6 @@
   }
 
   @media screen and (min-width: 800px) {
-    .foreground {
-      margin-left: 2em;
-    }
-
     .background {
       width: 100%;
       height: 100svh;

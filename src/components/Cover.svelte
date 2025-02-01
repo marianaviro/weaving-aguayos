@@ -26,16 +26,17 @@
     flex-direction: row;
     align-content: center;
     height: 25vh;
-    background-color: #f5f3ef;
+    background-color: #f85230;
+    justify-content: start;
   }
   .cover .border {
     margin: 0;
     padding: 0;
     height: 25px;
-    background-image: url("/border.svg");
+    background-image: url("/border-purple.svg");
     background-repeat: repeat-x;
     background-size: auto 100%;
-    background-color: #3d003b;
+    background-color: #330033;
   }
 
   .cover .purple {
@@ -48,9 +49,9 @@
     text-align: left;
   }
   .cover {
-    margin: 35vh auto;
-    background-color: #3d003b;
-    width: 100vw;
+    margin: 35vh 0 0 0;
+    background-color: #330033;
+    width: 100%;
     height: auto;
     pointer-events: none;
     filter: drop-shadow(0 0 5px #47004577);
@@ -73,13 +74,10 @@
     max-width: 350px;
   }
   .cover .author {
-    color: #88419d;
+    color: #993399;
     font-size: 1rem;
   }
   @media screen and (min-width: 800px) {
-    .cover {
-      margin: 35vh 0 0 -2em;
-    }
     .cover .cover-container {
       padding: 3em 3em 3em 5em;
     }

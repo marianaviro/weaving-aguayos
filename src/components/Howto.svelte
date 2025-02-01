@@ -96,7 +96,8 @@
 </script>
 
 <div class="how-to">
-  <!-- <p class="title">How to read what's next</p> -->
+  <div class="border"></div>
+  <p class="title">How to read what's next</p>
   <div class="carousel">
     <button class="toggle" onclick={toggleLeft} onkeydown={toggleLeft}>
       <img class="scroll-icon left" src="/scroll-icon.svg" alt="scroll icon" />
@@ -111,19 +112,19 @@
 
       <div class="explanation">
         {#if !explanation.specialtype}
-          <p class="purple">{explanation.measure}</p>
+          <p class="white">{explanation.measure}</p>
           <p class="blue">{explanation.people}</p>
-          <p class="purple">{explanation.action}</p>
+          <p class="white">{explanation.action}</p>
           <p class="yellow">{explanation.countries}</p>
         {:else if explanation.specialtype === 1}
-          <p class="purple">{explanation.measure}</p>
-          <p class="purple">{explanation.people}</p>
+          <p class="white">{explanation.measure}</p>
+          <p class="white">{explanation.people}</p>
           <p class="white">{explanation.action}</p>
           <p class="white">{explanation.countries}</p>
           <p class="white">{explanation.sp1}</p>
         {:else if explanation.specialtype === 2}
-          <p class="purple">{explanation.measure}</p>
-          <p class="purple">{explanation.people}</p>
+          <p class="white">{explanation.measure}</p>
+          <p class="white">{explanation.people}</p>
           <p class="white">{explanation.action}</p>
           <p class="white">{explanation.countries}</p>
           <p class="white">{explanation.sp1}</p>
@@ -140,13 +141,12 @@
 <style>
   .how-to {
     padding: 3em 0.5em;
-    /* background-color: #3d003b; */
-    background-color: #230523;
+    background-color: #330033;
     color: #f6f3ef;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
   }
 
@@ -155,20 +155,29 @@
   }
 
   .how-to .content {
-    width: 70vw;
-    height: 60vh;
+    /* width: 80vw; */
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: center;
   }
 
+  .how-to .border {
+    margin: 0;
+    padding: 0;
+    height: 25px;
+    background-image: url("/border.svg");
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    background-color: #330033;
+  }
+
   .how-to .explanation {
-    margin: 0 0 2em 2em;
+    margin: auto 2em;
   }
 
   .how-to .purple {
-    color: #88419d;
+    color: #993399;
   }
   .how-to .white {
     color: #f6f3ef;
@@ -186,7 +195,8 @@
   .how-to .carousel {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: start;
+    min-height: 450px;
   }
 
   .how-to .carousel .image {
@@ -217,6 +227,7 @@
     text-align: right;
     cursor: pointer;
     font-style: normal;
+    margin: auto 0;
   }
   .how-to .toggle:hover {
     opacity: 0.5;
@@ -224,14 +235,9 @@
   @media screen and (min-width: 800px) {
     .how-to .content {
       flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      width: 80vw;
-      height: 60vh;
-    }
-    .how-to .explanation {
-      margin: 0;
-      margin-left: 2em;
+      /* min-width: 500px; */
+      justify-content: start;
+      margin: 0 auto;
     }
     .how-to .scroll-icon.right {
       margin-right: 0.7em;
