@@ -180,7 +180,8 @@
     <g
       opacity={legend ? 1 : 0}
       transform={`translate(${padding.left}, ${padding.top})`}
-      style="transition: opacity 250ms;"
+      style="transition: opacity 250ms; filter: invert(1);
+mix-blend-mode: difference;"
     >
       {#each magnitudes as mag, k}
         <!-- <text

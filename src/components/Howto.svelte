@@ -160,6 +160,7 @@
     flex-direction: column;
     align-items: start;
     justify-content: center;
+    min-height: 500px;
   }
 
   .how-to .border {
@@ -174,6 +175,8 @@
 
   .how-to .explanation {
     margin: auto 2em;
+    margin-top: 2em;
+    width: 300px;
   }
 
   .how-to .purple {
@@ -235,9 +238,13 @@
   @media screen and (min-width: 800px) {
     .how-to .content {
       flex-direction: row;
-      /* min-width: 500px; */
-      justify-content: start;
+      min-width: 500px;
+      min-height: 500px;
+      justify-content: stretch;
       margin: 0 auto;
+    }
+    .how-to .carousel {
+      align-items: center;
     }
     .how-to .scroll-icon.right {
       margin-right: 0.7em;
@@ -246,6 +253,12 @@
     .how-to .scroll-icon.left {
       margin-left: 0.7em;
       margin-right: 1.7em;
+    }
+    .how-to .image {
+      margin: auto;
+    }
+    .how-to .explanation {
+      margin: auto 2em;
     }
   }
 </style>
