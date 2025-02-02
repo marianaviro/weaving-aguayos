@@ -179,11 +179,11 @@
     background-color: transparent;
     text-align: right;
     cursor: pointer;
-    font-style: normal;
+    font-style: italic;
     min-width: 100px;
   }
   button.toggle:hover {
-    font-style: italic;
+    color: #ff6633;
   }
 
   .sortfilter {
@@ -207,7 +207,7 @@
   }
 
   .sorts label:hover {
-    font-style: italic;
+    color: #ff6633;
   }
 
   .filters p,

@@ -3,15 +3,16 @@
   let { content } = $props();
 </script>
 
-<div class="step">
+<div class="step" style={content.subtitle ? "background-color: #330033;" : ""}>
   <p class="subtitle">{content.subtitle}</p>
   <p class="body">
-    {content.text}
+    {@html content.text}
   </p>
 </div>
 
 <style>
   .step {
+    font-size: 1.15em;
     margin-top: -80vh;
     margin: 70vh auto;
     max-width: 550px;
@@ -26,12 +27,11 @@
   }
   .step .subtitle {
     color: #ff6633;
-    font-weight: bold;
-    font-size: 1.25em;
+    font-size: 2em;
+    line-height: 1.2em;
   }
   .step .body {
     color: #330033;
-    font-size: 1em;
     line-height: 1.7em;
   }
   .step p {
@@ -45,20 +45,6 @@
       margin: 40vh 0 0 2em;
       width: 600px;
       padding: 4em;
-    }
-
-    .visual .left {
-      width: 350px;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .visual .right {
-      width: calc(100% - 350px);
-      height: 100%;
-      position: relative;
-      pointer-events: none;
     }
   }
 </style>

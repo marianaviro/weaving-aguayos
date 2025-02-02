@@ -8,6 +8,9 @@
   import Highlight from "../components/Highlight.svelte";
 
   let { data } = $props();
+  let dataSrc = "UN International Migrant Stock 2020.";
+  let dataUrl =
+    "https://www.un.org/development/desa/pd/content/international-migrant-stock";
   let selectedCountry = $state("");
   let scrollY = $state(0); // Current scroll position
   let scrollHeight = $state(0); // Total scrollable height
@@ -74,10 +77,12 @@
       <div class="step-container">
         <Cover
           content={{
-            title: "Weaving Migration",
+            title: "Tierra tejida",
             intro:
-              "Exploring the beauty of migratory flows within Latin America and the Caribbean",
-            author: "by Mariana Villamizar, Jan 2024",
+              "Honoring the beauty of migratory flows in Latin America and the Caribbean",
+            author: "Mariana Villamizar",
+            dataSrc,
+            dataUrl,
           }}
           {started}
         />
@@ -86,9 +91,14 @@
     </div>
   </section>
   <Highlight
-    content={"This project is a tribute to the beauty of these weavings, to Latin America and the Caribbean, to migration."}
+    content={"Here’s what happens when we visualize these human movements as aguayos, reframing migration as a vibrant force that nurtures uniquely diverse communities."}
   />
-  <section id="how-to"><Howto /></section>
+  <!-- <Highlight
+    content={"This project is a tribute to the beauty of these weavings, to Latin America and the Caribbean, to migration."}
+  /> -->
+  <section id="how-to">
+    <Howto {dataSrc} {dataUrl} />
+  </section>
   <section id="gallery"><Gallery {data} bind:selectedCountry /></section>
   <section id="footer">
     <div class="banner">

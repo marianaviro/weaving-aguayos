@@ -6,7 +6,7 @@
 <section id="highlight">
   <div class="border"></div>
   <div class="banner">
-    {"This project is a tribute to the beauty of these weavings, to diversity, to Latin America and the Caribbean, to migration."}
+    {content}
   </div>
   <div class="border"></div>
 </section>
@@ -20,7 +20,7 @@
   }
   #highlight .banner {
     font-size: 2em;
-    max-width: 650px;
+    max-width: 750px;
   }
 
   .banner {

@@ -18,6 +18,12 @@
   let bg = palette(dest_subregion)[7];
 
   // interaction
+  let mobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+      ? true
+      : false;
   let legend = $state(false);
   let show = $state(true);
   let currentCountry = $state();
@@ -85,7 +91,9 @@
       <b>{tooltip?.country}</b> to <b>{name}</b>
     </p>
     <p class="year">in 2020</p>
-  {:else}<p class="text">(hover over the weaving)</p>{/if}
+  {:else}<p class="text">
+      ({mobile ? "click" : "hover"} over the weaving)
+    </p>{/if}
 </div>
 
 <!-- Legend -->
@@ -180,8 +188,7 @@
     <g
       opacity={legend ? 1 : 0}
       transform={`translate(${padding.left}, ${padding.top})`}
-      style="transition: opacity 250ms; filter: invert(1);
-mix-blend-mode: difference;"
+      style="transition: opacity 250ms"
     >
       {#each magnitudes as mag, k}
         <!-- <text

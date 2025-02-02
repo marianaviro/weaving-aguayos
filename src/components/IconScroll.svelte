@@ -4,7 +4,7 @@
 
 <div class={started ? "scroll-icon inactive" : "scroll-icon"}>
   <p>Scroll</p>
-  <img class="bounce" src="/scroll-icon-dark.svg" alt="scroll icon" />
+  <img class="bounce" src="/scroll-icon-orange.svg" alt="scroll icon" />
 </div>
 
 <style>
@@ -17,7 +17,7 @@
     align-items: center;
     flex-direction: column;
     z-index: 100;
-    padding-top: 2em;
+    padding-top: 1em;
   }
 
   .scroll-icon.inactive {
@@ -25,7 +25,7 @@
   }
 
   .scroll-icon p {
-    color: #3d003b;
+    color: #ff6633;
     font-weight: bold;
     font-size: 0.85em;
   }

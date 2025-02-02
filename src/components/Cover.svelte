@@ -9,24 +9,38 @@
   <div class="purple">
     <div class="border"></div>
     <div class="cover-container">
+      <div></div>
       <p class="title">{content.title}</p>
       <p class="intro">
         {content.intro}
       </p>
-      <p class="author">{content.author}</p>
+      <p class="author">BY: {content.author}</p>
+      <p class="data">
+        Data from the <span
+          ><a href={content.dataUrl} aria-labelledby={content.dataSrc}
+            >{content.dataSrc}</a
+          ></span
+        >
+      </p>
     </div>
     <div class="border"></div>
   </div>
-  <div class="white"><IconScroll {started} /></div>
+  <div class="white">
+    <IconScroll {started} />
+  </div>
 </div>
 
 <style>
+  .cover a:hover {
+    color: #f85230;
+    cursor: pointer;
+  }
   .cover .white {
     display: flex;
     flex-direction: row;
     align-content: center;
-    height: 25vh;
-    background-color: #f85230;
+    height: 14vh;
+    background-color: #f5f3ef;
     justify-content: start;
   }
   .cover .border {
@@ -45,11 +59,11 @@
   }
 
   .cover .cover-container {
-    padding: 3rem;
+    padding: 1.8em 3em;
     text-align: left;
   }
   .cover {
-    margin: 35vh 0 0 0;
+    margin: 5vh 0 0 0;
     background-color: #330033;
     width: 100%;
     height: auto;
@@ -63,26 +77,49 @@
     position: relative;
     margin: 16px 0;
   }
-  .cover .title {
+  .cover p a {
+    color: #993399;
+    font-style: italic;
+    text-align: right;
+  }
+  .cover p.title {
     font-weight: bold;
-    color: #f85230;
-    font-size: 1.5rem;
+    color: #ff6633;
+    font-size: 2em;
+    line-height: 1.2em;
+    margin-top: 0;
   }
   .cover .intro {
     color: #f5f3ef;
-    font-size: 1rem;
-    max-width: 350px;
+    max-width: 300px;
   }
   .cover .author {
     color: #993399;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    text-transform: uppercase;
+  }
+
+  .cover .jump {
+    font-size: 0.9rem;
+    color: #ff6633;
+  }
+
+  .cover .jump a {
+    text-decoration: none;
   }
   @media screen and (min-width: 800px) {
+    .cover {
+      margin: 25vh 0 0 0;
+    }
     .cover .cover-container {
       padding: 3em 3em 3em 5em;
     }
     .cover p {
       padding: 0 2rem 0 0;
+    }
+    .cover .white {
+      height: 25vh;
     }
   }
 </style>

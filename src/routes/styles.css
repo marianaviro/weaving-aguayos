@@ -9,12 +9,38 @@ body {
     font-family: 'Inconsolata';
     font-weight: 400;
     font-style: normal;
-    font-size: 1em;
+    font-size: 1.1em;
 }
 
+a {
+    text-decoration: underline;
+    color: #330033;
+}
+
+a:hover {
+    color: #ff6633;
+}
+
+strong {
+    color: #ff6633;
+    font-weight: normal;
+}
+
+p.data {
+    color: #993399;
+    font-size: 0.9rem;
+    margin-top: 0;
+  }
+  p.data a {
+    color: #993399;
+  }
+  p.data a:hover {
+    color: #ff6633;
+  }
+/* 
 .sidebar {
     z-index: 999;
-}
+} */
 
 /* CSS Reset from https://www.joshwcomeau.com/css/custom-css-reset/ */
 

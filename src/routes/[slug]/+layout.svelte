@@ -98,7 +98,6 @@
   }
   .back a:hover {
     cursor: pointer;
-    font-style: italic;
     transform: translateX(-5px);
     transition: transform 500ms;
   }
@@ -145,6 +144,10 @@
 
     .back a {
       color: #3d003b;
+    }
+
+    .back a:hover {
+      color: #ff6633;
     }
   }
 </style>
