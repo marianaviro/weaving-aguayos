@@ -62,14 +62,6 @@
     padding: 1.8em 3em;
     text-align: left;
   }
-  .cover {
-    margin: 5vh 0 0 0;
-    background-color: #330033;
-    width: 100%;
-    height: auto;
-    pointer-events: none;
-    filter: drop-shadow(0 0 5px #47004577);
-  }
 
   .cover p {
     padding: 0;
@@ -108,7 +100,24 @@
   .cover .jump a {
     text-decoration: none;
   }
+
+  .cover {
+    margin: 18vh 0 0 0;
+    background-color: #330033;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    filter: drop-shadow(0 0 5px #47004577);
+  }
   @media screen and (min-width: 800px) {
+    .cover {
+      margin: 25vh 0 0 0;
+    }
+    .cover .white {
+      height: 10vh;
+    }
+  }
+  @media screen and (min-width: 1200px) {
     .cover {
       margin: 25vh 0 0 0;
     }
@@ -119,7 +128,7 @@
       padding: 0 2rem 0 0;
     }
     .cover .white {
-      height: 25vh;
+      height: 20vh;
     }
   }
 </style>

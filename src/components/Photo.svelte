@@ -10,9 +10,9 @@
 <style>
   .photo {
     position: absolute;
-    max-width: 80vw;
+    /* max-width: 70vw; */
     display: flex;
-    margin: 60px 0 0 60px;
+    /* margin: 60px 0 0 60px; */
     justify-content: center;
     align-items: center;
     z-index: 110;
@@ -21,7 +21,7 @@
     border-radius: 3px;
     filter: drop-shadow(0 0 5px #47004577);
     transform: translateX(100vw);
-    transition: transform 0.75s ease-in;
+    transition: transform 0.75s ease-in-out;
   }
 
   .photo.active {
@@ -34,6 +34,17 @@
     }
 
     .photo {
+      /* margin: 60px 0 0 60px; */
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .photo img {
+      max-height: 80vh;
+      max-width: 80vw;
+    }
+
+    .photo {
+      /* margin: 60px 0 0 60px; */
     }
   }
 </style>

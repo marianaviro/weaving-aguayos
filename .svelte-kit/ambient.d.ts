@@ -56,6 +56,7 @@ declare module '$env/static/private' {
 	export const PATH: string;
 	export const npm_package_json: string;
 	export const _: string;
+	export const LaunchInstanceID: string;
 	export const npm_config_userconfig: string;
 	export const npm_config_init_module: string;
 	export const CONDA_PREFIX: string;
@@ -84,6 +85,7 @@ declare module '$env/static/private' {
 	export const npm_config_user_agent: string;
 	export const INFOPATH: string;
 	export const HOMEBREW_CELLAR: string;
+	export const SECURITYSESSIONID: string;
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
 	export const NODE_ENV: string;
@@ -148,6 +150,7 @@ declare module '$env/dynamic/private' {
 		PATH: string;
 		npm_package_json: string;
 		_: string;
+		LaunchInstanceID: string;
 		npm_config_userconfig: string;
 		npm_config_init_module: string;
 		CONDA_PREFIX: string;
@@ -176,6 +179,7 @@ declare module '$env/dynamic/private' {
 		npm_config_user_agent: string;
 		INFOPATH: string;
 		HOMEBREW_CELLAR: string;
+		SECURITYSESSIONID: string;
 		npm_node_execpath: string;
 		npm_config_prefix: string;
 		NODE_ENV: string;

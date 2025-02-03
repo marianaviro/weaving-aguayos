@@ -15,23 +15,30 @@
   let scrollY = $state(0); // Current scroll position
   let scrollHeight = $state(0); // Total scrollable height
   let progress = $state(0); // Scroll progress (0 to 1)
+  let currentStep = $state(0);
   let started = $state(false);
   let zoom = $state(0.75);
 
-  const handleZoom = (p) => {
-    if (p < 9) {
-      zoom = 0.75;
-    } else if (p >= 9 && p < 13) {
-      // zoom = 1.2;
-      zoom = 1.4;
-    } else if (p >= 13) {
-      zoom = 0.6;
-      // zoom = 0.75;
-    }
-    console.log("Zoom: " + zoom);
-  };
+  let device = $state("");
+
+  // handleResize();
+
+  // const handleZoom = (p) => {
+  //   if (p < 9) {
+  //     zoom = 0.75;
+  //   } else if (p >= 9 && p < 13) {
+  //     // zoom = 1.2;
+  //     // zoom = 1.4;
+  //     zoom = 0.75;
+  //   } else if (p >= 13) {
+  //     zoom = 0.6;
+  //     // zoom = 0.75;
+  //   }
+  //   console.log("Zoom: " + zoom);
+  // };
 
   const handleScroll = () => {
+    let prevStep = currentStep;
     scrollY = window.scrollY;
     scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     progress = scrollHeight ? (scrollY / scrollHeight) * 100 : 0;
@@ -40,11 +47,67 @@
     } else {
       started = false;
     }
-    handleZoom(progress);
 
-    console.log("Scroll Y: " + scrollY);
-    console.log("Scroll Height: " + scrollHeight);
+    if (device === "mobile") {
+      if (progress <= 1.4) {
+        currentStep = 0;
+      } else if (progress > 1.4 && progress <= 6.7) {
+        started = true;
+        currentStep = 1;
+      } else if (progress > 6.7 && progress <= 17) {
+        currentStep = 2;
+      } else if (progress > 17 && progress <= 35) {
+        currentStep = 4;
+      } else {
+        currentStep = 4;
+      }
+    } else if (device === "tablet") {
+      if (progress <= 2) {
+        currentStep = 0;
+      } else if (progress > 2 && progress <= 10) {
+        started = true;
+        currentStep = 1;
+      } else if (progress > 10 && progress <= 21) {
+        currentStep = 2;
+      } else if (progress > 21 && progress <= 35) {
+        currentStep = 4;
+      } else {
+        currentStep = 4;
+      }
+    } else {
+      if (progress <= 6) {
+        currentStep = 0;
+      } else if (progress > 6 && progress <= 18) {
+        started = true;
+        currentStep = 1;
+      } else if (progress > 18 && progress <= 30) {
+        currentStep = 2;
+      } else if (progress > 33 && progress <= 35) {
+        currentStep = 4;
+      } else {
+        currentStep = 4;
+      }
+      if (prevStep != currentStep) {
+        console.log(currentStep);
+      }
+    }
+
+    // handleZoom(progress);
+
+    // console.log("Scroll Y: " + scrollY);
+    // console.log("Scroll Height: " + scrollHeight);
     console.log("Progress: " + progress);
+  };
+
+  const handleResize = () => {
+    if (window.innerWidth <= 800) {
+      device = "mobile";
+    } else if (window.innerWidth > 800 && window.innerWidth <= 1200) {
+      device = "tablet";
+    } else {
+      device = "desktop";
+    }
+    console.log(device);
   };
 
   $effect(() => {
@@ -52,22 +115,33 @@
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   });
+
+  $effect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  });
 </script>
 
 <article>
   <section id="scrolly">
     <div class="background">
-      <div class="visual" style={"background-size: " + 80 * zoom + "vh;"}>
+      <div class="visual" style={"background-size: " + 80 * progress * +"vh;"}>
         <div class="left"></div>
         <div class="right">
           <Photo
-            active={progress > 1 && progress <= 6}
-            source="/los-andes.jpg"
+            active={currentStep === 1}
+            source="/collage1.jpg"
             alt="Los Andes mountain range"
           />
           <Photo
-            active={progress > 6 && progress <= 9}
-            source="/tradition.jpg"
+            active={currentStep === 2}
+            source="/collage2.jpg"
+            alt="Incan woman wearing an aguayo to carry their baby"
+          />
+          <Photo
+            active={currentStep === 4}
+            source="/collage3.jpg"
             alt="Incan woman wearing an aguayo to carry their baby"
           />
         </div>
@@ -77,9 +151,9 @@
       <div class="step-container">
         <Cover
           content={{
-            title: "Tierra tejida",
+            title: "Aguayos",
             intro:
-              "Honoring the beauty of migratory flows in Latin America and the Caribbean",
+              "Exploring the beauty of migratory flows within Latin America and the Caribbean",
             author: "Mariana Villamizar",
             dataSrc,
             dataUrl,

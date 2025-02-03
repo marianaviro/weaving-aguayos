@@ -3,7 +3,7 @@
   let { content } = $props();
 </script>
 
-<div class="step" style={content.subtitle ? "background-color: #330033;" : ""}>
+<div class={content.subtitle ? "step highlighted" : "step"}>
   <p class="subtitle">{content.subtitle}</p>
   <p class="body">
     {@html content.text}
@@ -24,6 +24,10 @@
     background-color: #f5f3ef;
     border-radius: 3px;
     filter: drop-shadow(0 0 5px #47004577);
+  }
+
+  .step.highlighted {
+    background-color: #330033;
   }
   .step .subtitle {
     color: #ff6633;
