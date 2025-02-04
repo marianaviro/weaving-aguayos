@@ -132,17 +132,19 @@
           <Photo
             active={currentStep === 1}
             source="/collage1.jpg"
-            alt="Los Andes mountain range"
+            alt="Collage of a scorpion, a couple of elderly people with blurred faces, a sweater with no one wearing it, and a letter envelope."
           />
           <Photo
             active={currentStep === 2}
             source="/collage2.jpg"
-            alt="Incan woman wearing an aguayo to carry their baby"
+            alt="Collage of a person with a blurred face. Behind them, an assortment of different fabrics."
           />
           <Photo
             active={currentStep === 4}
             source="/collage3.jpg"
-            alt="Incan woman wearing an aguayo to carry their baby"
+            alt="Collage of an Incan woman wearing an aguayo to carry their baby, a house, three sheeps, and a mountain range with a flower blossoming from behind."
+            attr="A Peruvian woman carrying a child in an aguayo: Wfisher at the English-language Wikipedia"
+            attrUrl="https://commons.wikimedia.org/wiki/File:Incan.jpg#/media/File:Incan.jpg"
           />
         </div>
       </div>
@@ -176,12 +178,17 @@
   <section id="gallery"><Gallery {data} bind:selectedCountry /></section>
   <section id="footer">
     <div class="banner">
-      {"Made with 🧡 🇨🇴"}
+      {"Made with 🧡 by 🇨🇴"}
     </div>
   </section>
 </article>
 
 <style>
+  #footer {
+    padding: 2em;
+    background-color: #330033;
+    color: #f6f3ef;
+  }
   #scrolly {
     position: relative;
     padding: 0;
@@ -233,7 +240,7 @@
     -webkit-box-direction: normal;
     flex-direction: row;
     position: relative;
-    pointer-events: none;
+    /* pointer-events: none; */
     background-image: url("/home.svg");
     background-position: top left;
     transition: all 1s ease-in-out;
@@ -256,7 +263,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    pointer-events: none;
+    /* pointer-events: none; */
   }
 
   @media screen and (min-width: 800px) {
@@ -264,7 +271,7 @@
       width: 100%;
       height: 100svh;
       position: sticky;
-      pointer-events: none;
+      /* pointer-events: none; */
     }
 
     .visual {
@@ -282,7 +289,6 @@
       width: calc(100% - 350px);
       height: 100%;
       position: relative;
-      pointer-events: none;
       display: flex;
       justify-content: center;
       align-items: center;

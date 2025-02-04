@@ -14,7 +14,12 @@
       <p class="intro">
         {content.intro}
       </p>
-      <p class="author">BY: {content.author}</p>
+      <p class="author">
+        BY: <a
+          href="https://www.linkedin.com/in/marianavillamizar/"
+          target="_blank">{content.author}</a
+        >
+      </p>
       <p class="data">
         Data from the <span
           ><a href={content.dataUrl} aria-labelledby={content.dataSrc}
@@ -71,7 +76,7 @@
   }
   .cover p a {
     color: #993399;
-    font-style: italic;
+    /* font-style: italic; */
     text-align: right;
   }
   .cover p.title {
@@ -114,7 +119,7 @@
       margin: 25vh 0 0 0;
     }
     .cover .white {
-      height: 10vh;
+      height: 15vh;
     }
   }
   @media screen and (min-width: 1200px) {
