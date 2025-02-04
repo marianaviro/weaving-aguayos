@@ -30,8 +30,8 @@ declare module '$env/static/private' {
 	export const NODE: string;
 	export const INIT_CWD: string;
 	export const NVM_CD_FLAGS: string;
-	export const TERM: string;
 	export const SHELL: string;
+	export const TERM: string;
 	export const HOMEBREW_REPOSITORY: string;
 	export const TMPDIR: string;
 	export const npm_config_global_prefix: string;
@@ -56,7 +56,6 @@ declare module '$env/static/private' {
 	export const PATH: string;
 	export const npm_package_json: string;
 	export const _: string;
-	export const LaunchInstanceID: string;
 	export const npm_config_userconfig: string;
 	export const npm_config_init_module: string;
 	export const CONDA_PREFIX: string;
@@ -72,8 +71,8 @@ declare module '$env/static/private' {
 	export const npm_package_version: string;
 	export const _CE_M: string;
 	export const XPC_SERVICE_NAME: string;
-	export const HOME: string;
 	export const SHLVL: string;
+	export const HOME: string;
 	export const HOMEBREW_PREFIX: string;
 	export const npm_config_cache: string;
 	export const CONDA_PYTHON_EXE: string;
@@ -85,7 +84,6 @@ declare module '$env/static/private' {
 	export const npm_config_user_agent: string;
 	export const INFOPATH: string;
 	export const HOMEBREW_CELLAR: string;
-	export const SECURITYSESSIONID: string;
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
 	export const NODE_ENV: string;
@@ -124,8 +122,8 @@ declare module '$env/dynamic/private' {
 		NODE: string;
 		INIT_CWD: string;
 		NVM_CD_FLAGS: string;
-		TERM: string;
 		SHELL: string;
+		TERM: string;
 		HOMEBREW_REPOSITORY: string;
 		TMPDIR: string;
 		npm_config_global_prefix: string;
@@ -150,7 +148,6 @@ declare module '$env/dynamic/private' {
 		PATH: string;
 		npm_package_json: string;
 		_: string;
-		LaunchInstanceID: string;
 		npm_config_userconfig: string;
 		npm_config_init_module: string;
 		CONDA_PREFIX: string;
@@ -166,8 +163,8 @@ declare module '$env/dynamic/private' {
 		npm_package_version: string;
 		_CE_M: string;
 		XPC_SERVICE_NAME: string;
-		HOME: string;
 		SHLVL: string;
+		HOME: string;
 		HOMEBREW_PREFIX: string;
 		npm_config_cache: string;
 		CONDA_PYTHON_EXE: string;
@@ -179,7 +176,6 @@ declare module '$env/dynamic/private' {
 		npm_config_user_agent: string;
 		INFOPATH: string;
 		HOMEBREW_CELLAR: string;
-		SECURITYSESSIONID: string;
 		npm_node_execpath: string;
 		npm_config_prefix: string;
 		NODE_ENV: string;

@@ -156,7 +156,7 @@
             title: "Aguayos",
             intro:
               "Exploring the beauty of migratory flows within Latin America and the Caribbean",
-            author: "Mariana Villamizar",
+            author: "Mariana Villamizar Rodríguez",
             dataSrc,
             dataUrl,
           }}
