@@ -15,9 +15,8 @@
         {content.intro}
       </p>
       <p class="author">
-        BY: <a
-          href="https://www.linkedin.com/in/marianavillamizar/"
-          target="_blank">{content.author}</a
+        BY: <a href="https://marianaviro.myportfolio.com/" target="_blank"
+          >{content.author}</a
         >
       </p>
       <p class="data">
