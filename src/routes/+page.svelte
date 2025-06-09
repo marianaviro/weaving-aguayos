@@ -123,6 +123,9 @@
   });
 </script>
 
+<svelte:head>
+  <meta name="author" content="Mariana Villamizar" />
+</svelte:head>
 <article>
   <section id="scrolly">
     <div class="background">
